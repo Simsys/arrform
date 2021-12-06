@@ -1,15 +1,19 @@
 #![no_std]
 
-//! A Replacement for the format! macro, based on a fixed-size array allocated on the stack
+//! String formatting without memory allocator
+//! ==========================================
 //! 
 //! In bare matal systems, there is often the task of converting numbers into text and formatting 
 //! them. The standard Rust functions like format!, write! etc. cannot be used in no_std 
-//! environments because they require a memory allocator. The [arrform!] macro uses the standard 
+//! environments because they require a memory allocator. The arrform! macro uses the standard 
 //! library functions, but writes to a fixed length array which is alocated on the stack.
+//! 
+//! This crate is usable in no_std environments. This is a replacement for the format! macro, based 
+//! on a fixed-size array allocated on the stack.
 //! 
 //! # arrform!
 //! 
-//! ```
+//! ``` rust
 //! use arrform::{arrform, ArrForm};
 //! 
 //! let af = arrform!(64, "write some stuff {}: {:.2}", "foo", 42.3456);
@@ -57,6 +61,7 @@ use core::format_args;
 ///     }
 /// }
 /// 
+/// // Use the buffer a second time
 /// af.format(
 ///     format_args!("same buffer, new {}, int {}, float {:.1}", "text", 123, 4.1234)
 /// ).unwrap();
