@@ -136,24 +136,3 @@ macro_rules! arrform {
         af
     }}
 }
-
-#[test]
-fn format_macro() {
-    let s = arrform!(64, "write some stuff {}: {:.2}", "foo", 42.3456);
-    assert_eq!("write some stuff foo: 42.35", s.as_str());
-    assert_eq!(b"write some stuff foo: 42.35", s.as_bytes());
-}
-
-#[test]
-fn format_struct() {
-    let mut s2 = ArrForm::<64>::new();
-    match s2.format(format_args!("write some stuff {}: {:.2}", "foo", 42.3456)) {
-        Ok(()) => {
-            assert_eq!("write some stuff foo: 42.35", s2.as_str());
-            assert_eq!(b"write some stuff foo: 42.35", s2.as_bytes());
-        },
-        Err(_) => {
-            panic!("An error occurred");
-        }
-    }
-}
