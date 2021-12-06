@@ -1,2 +1,4 @@
 /target
 Cargo.lock
+/examples/stm32f412-disco/target
+/examples/stm32f412-disco/.vscode/.cortex-debug*

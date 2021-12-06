@@ -1,0 +1,40 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "cortex-debug",
+        "request": "launch",
+        "name": "Debug (OpenOCD)",
+        "servertype": "openocd",
+        "cwd": "${workspaceRoot}",
+        "preLaunchTask": "Cargo Build (debug)",
+        "runToMain": true,
+        "executable": "./target/thumbv7em-none-eabihf/debug/test_size",
+        "device": "STM32F412ZGT6",
+        "configFiles": [
+          "interface/stlink.cfg",
+          "target/stm32f4x.cfg"
+        ],
+        "svdFile": "${workspaceRoot}/STM32F412.svd",
+      },
+      {
+        "type": "cortex-debug",
+        "request": "launch",
+        "name": "Run (OpenOCD)",
+        "servertype": "openocd",
+        "cwd": "${workspaceRoot}",
+        "preLaunchTask": "Cargo Build (release)",
+        "runToMain": true,
+        "executable": "./target/thumbv7em-none-eabihf/release/test_size",
+        "device": "STM32F412ZGT6",
+        "configFiles": [
+          "interface/stlink.cfg",
+          "target/stm32f4x.cfg"
+        ],
+        "svdFile": "${workspaceRoot}/STM32F412.svd",
+      },
+    ]
+  }
