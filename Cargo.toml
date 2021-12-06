@@ -7,7 +7,7 @@ description = "String formatting without memory allocator"
 repository = "https://github.com/Simsys/arrform"
 readme = "readme.md"
 keywords = ["no-std", "no-heap", "embedded", "string-formatting"]
-categories = ["No standard library", "Embedded development", "Value formatting"]
+categories = ["no-std", "embedded", "value-formatting"]
 
 
 
