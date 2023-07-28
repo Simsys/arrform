@@ -14,7 +14,7 @@
 //! # arrform!
 //! 
 //! ``` rust
-//! use arrform::{arrform, ArrForm};
+//! use arrform::arrform;
 //! 
 //! let af = arrform!(64, "write some stuff {}: {:.2}", "foo", 42.3456);
 //! assert_eq!("write some stuff foo: 42.35", af.as_str());
@@ -126,7 +126,7 @@ impl<const BUF_SIZE: usize> fmt::Write for ArrForm<BUF_SIZE> {
 /// text. The macro panics if the buffer is chosen too small.
 /// 
 /// ```
-/// use arrform::{arrform, ArrForm};
+/// use arrform::arrform;
 /// 
 /// let af = arrform!(64, "write some {}, int {}, float {:.3}", "stuff", 4711, 3.1415);
 /// assert_eq!("write some stuff, int 4711, float 3.142", af.as_str());
@@ -134,7 +134,7 @@ impl<const BUF_SIZE: usize> fmt::Write for ArrForm<BUF_SIZE> {
 #[macro_export]
 macro_rules! arrform {
     ($size:expr, $($arg:tt)*) => {{
-        let mut af = ArrForm::<$size>::new();
+        let mut af = $crate::ArrForm::<$size>::new();
 
         // Panic on buffer overflow
         af.format(format_args!($($arg)*)).expect("Buffer overflow");
