@@ -3,7 +3,7 @@
 //! String formatting without memory allocator
 //! ==========================================
 //! 
-//! In bare matal systems, there is often the task of converting numbers into text and formatting 
+//! In bare metal systems, there is often the task of converting numbers into text and formatting 
 //! them. The standard Rust functions like format!, write! etc. cannot be used in no_std 
 //! environments because they require a memory allocator. The arrform! macro uses the standard 
 //! library functions, but writes to a fixed length array which is alocated on the stack.
@@ -119,7 +119,7 @@ impl<const BUF_SIZE: usize> fmt::Write for ArrForm<BUF_SIZE> {
     }
 }
 
-/// A macro to format numers into text, based on a fixed-size array allocated on the stack
+/// A macro to format numbers into text, based on a fixed-size array allocated on the stack
 /// 
 /// This macro first reserves a buffer on the stack. Then it uses the struct [ArrForm] to format 
 /// text and numbers. It returns an instance of ArrForm that allows easy access to the contained 
