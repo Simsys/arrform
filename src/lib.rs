@@ -3,7 +3,7 @@
 //! String formatting without memory allocator
 //! ==========================================
 //! 
-//! In bare matal systems, there is often the task of converting numbers into text and formatting 
+//! In bare metal systems, there is often the task of converting numbers into text and formatting 
 //! them. The standard Rust functions like format!, write! etc. cannot be used in no_std 
 //! environments because they require a memory allocator. The arrform! macro uses the standard 
 //! library functions, but writes to a fixed length array which is alocated on the stack.
@@ -14,7 +14,7 @@
 //! # arrform!
 //! 
 //! ``` rust
-//! use arrform::{arrform, ArrForm};
+//! use arrform::arrform;
 //! 
 //! let af = arrform!(64, "write some stuff {}: {:.2}", "foo", 42.3456);
 //! assert_eq!("write some stuff foo: 42.35", af.as_str());
@@ -119,14 +119,14 @@ impl<const BUF_SIZE: usize> fmt::Write for ArrForm<BUF_SIZE> {
     }
 }
 
-/// A macro to format numers into text, based on a fixed-size array allocated on the stack
+/// A macro to format numbers into text, based on a fixed-size array allocated on the stack
 /// 
 /// This macro first reserves a buffer on the stack. Then it uses the struct [ArrForm] to format 
 /// text and numbers. It returns an instance of ArrForm that allows easy access to the contained 
 /// text. The macro panics if the buffer is chosen too small.
 /// 
 /// ```
-/// use arrform::{arrform, ArrForm};
+/// use arrform::arrform;
 /// 
 /// let af = arrform!(64, "write some {}, int {}, float {:.3}", "stuff", 4711, 3.1415);
 /// assert_eq!("write some stuff, int 4711, float 3.142", af.as_str());
@@ -134,7 +134,7 @@ impl<const BUF_SIZE: usize> fmt::Write for ArrForm<BUF_SIZE> {
 #[macro_export]
 macro_rules! arrform {
     ($size:expr, $($arg:tt)*) => {{
-        let mut af = ArrForm::<$size>::new();
+        let mut af = $crate::ArrForm::<$size>::new();
 
         // Panic on buffer overflow
         af.format(format_args!($($arg)*)).expect("Buffer overflow");
