@@ -31,6 +31,10 @@ embedded with the help of the macro. It becomes even more expensive if f32 numbe
 formatted (30,928 bytes additional). The program code used to determine these numbers can be 
 found in the example directory.
 
+Looking for an alternative that wastes less memory? The Crate [tfmt](https://github.com/Simsys/tfmt) 
+can be used as an alternative in most cases. This crate has the additional advantages that it 
+is guaranteed not to contain any panic branches and also works much more efficiently.
+
 # License
 
 Apache version 2.0 or Mit
